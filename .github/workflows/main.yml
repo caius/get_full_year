@@ -1,0 +1,40 @@
+name: "Ruby"
+
+on:
+  push:
+    branches:
+      - "main"
+
+  pull_request:
+
+jobs:
+  build:
+    runs-on: "ubuntu-latest"
+    name: "Ruby ${{ matrix.ruby }}"
+    env:
+      RUBY_YJIT_ENABLE: "1"
+    strategy:
+      matrix:
+        ruby:
+          - "3.1.6"
+          - "3.2.6"
+          - "3.3.6"
+          - "3.4.1"
+
+    steps:
+      - uses: "actions/checkout@v4"
+
+      - name: "Set up Ruby"
+        uses: "ruby/setup-ruby@v1"
+        with:
+          ruby-version: "${{ matrix.ruby }}"
+          bundler-cache: true
+
+      - name: "Lint"
+        run: "bundle exec rake standard"
+
+      - name: "Test"
+        run: "bundle exec rake spec"
+
+      - name: "Build"
+        run: "bundle exec rake build:checksum"

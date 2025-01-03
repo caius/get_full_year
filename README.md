@@ -2,25 +2,34 @@
 
 <https://getfullyear.com> client in Ruby. Never have outdated copyright years in your app again.
 
-<!--
 ## Installation
 
 Install the gem and add to the application's Gemfile by executing:
 
 ```bash
-bundle add UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+bundle add get_full_year
 ```
 
 If bundler is not being used to manage dependencies, install the gem by executing:
 
 ```bash
-gem install UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+gem install get_full_year
 ```
 
 ## Usage
 
-TODO: Write usage instructions here
--->
+```ruby
+require "get_full_year"
+
+current = GetFullYear.get_full_year
+# => #<data GetFullYear::Client::Result year=2024, sponsored_by="KFC: finger lickin whatever">
+
+current.year # => 2024
+current.sponsored_by # => "KFC: finger lickin whatever"
+
+# T&Cs mean we have to output the sponsor
+$stderr.puts current.sponsored_by
+```
 
 ## Development
 
